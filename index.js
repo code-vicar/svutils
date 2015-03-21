@@ -1,5 +1,6 @@
 module.exports = {
-	def: require('./def'),
+    def: require('./def'),
     isNullOrUndefined: require('./isNullOrUndefined'),
-    getRandomInt: require('./getRandomInt')
+    getRandomInt: require('./getRandomInt'),
+    isArray: require('./isArray')
 };
