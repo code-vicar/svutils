@@ -1,8 +1,9 @@
 module.exports = {
     def: require('./def'),
-    isNullOrUndefined: require('./isNullOrUndefined'),
+    forEachOwnKey: require('./forEachOwnKey'),
     getRandomInt: require('./getRandomInt'),
     isArray: require('./isArray'),
+    isNullOrUndefined: require('./isNullOrUndefined'),
     Queue: require('./queue'),
     Stack: require('./stack')
 };
