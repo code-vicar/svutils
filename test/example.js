@@ -2,8 +2,8 @@ import _ from 'lodash'
 import BinaryHeap, { TYPE } from '../src/data/heap'
 
 let heap = new BinaryHeap({
-    type: TYPE.MIN
-    // type: TYPE.MAX
+    // type: TYPE.MIN
+    type: TYPE.MAX
 })
 
 let n = 20;
@@ -74,6 +74,9 @@ let next = null
 let sorted = []
 do {
     next = heap.pop()
+    if (heap._heap.length > 0) {
+        printHeap(heap)
+    }
     if (next !== null) {
         sorted.push(next)
     }
