@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import BinaryHeap, { TYPE } from '../src/data/heap'
+import BinaryHeap, { TYPE } from '../src/dataStructure/binaryHeap'
 
 let heap = new BinaryHeap({
     // type: TYPE.MIN

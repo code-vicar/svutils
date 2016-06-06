@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "test": "mocha -r babel-register test/**/*-test.js",
     "example": "mocha -r babel-register test/example.js"
   },
   "author": "Scott Vickers",

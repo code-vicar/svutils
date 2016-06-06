@@ -1,6 +1,7 @@
 import _ from 'lodash'
+import swapvalues from '../arrayValueSwap'
 
-export default class Heap {
+export default class BinaryHeap {
     constructor(options) {
         let heapType = _.get(options, 'type')
         let compare = _.get(options, 'compare')
@@ -9,6 +10,10 @@ export default class Heap {
         this.compare = (compare) ? compare : defaultCompare
 
         this._heap = []
+
+        this.heapify = () => {
+            heapify(this._heap, this.heapType, this.compare)
+        }
     }
 
     pop() {
@@ -33,19 +38,46 @@ export default class Heap {
 
         siftUp(this._heap, this._heap.length - 1, this.heapType, this.compare)
     }
+
+    peek() {
+        return this._heap[0]
+    }
+
+    static fromArray(array, options) {
+        let heap = new Heap(options)
+        heap.heapify(array)
+        return heap
+    }
 }
 
-export function siftDown(array, index, type, compare) {
-    let heapLength = array.length
+export function heapify(array, type, compare) {
+    if (!array || array.length <= 1) {
+        return array
+    }
+
+    // middle of the array is the first non leaf node
+    // from here we work backwards up the tree heapifying
+    // each parent node as we go
+    let i = Math.floor(array.length / 2)
+    while (i >= 0) {
+        siftDown(array, i, type, compare)
+        i--
+    }
+}
+
+export function siftDown(array, index, type, compare, heapSize) {
+    if (!_.isInteger(heapSize)) {
+        heapSize = array.length
+    }
     let leftChildIndex = (2 * index) + 1
     let rightChildIndex = (2 * index) + 2
 
     let _compare = getCompare(type, compare)
 
     let minMaxChildIndex = -1
-    if (leftChildIndex < heapLength && rightChildIndex < heapLength && _compare(array[rightChildIndex], array[leftChildIndex])) {
+    if (leftChildIndex < heapSize && rightChildIndex < heapSize && _compare(array[rightChildIndex], array[leftChildIndex])) {
         minMaxChildIndex = rightChildIndex
-    } else if (leftChildIndex < heapLength) {
+    } else if (leftChildIndex < heapSize) {
         minMaxChildIndex = leftChildIndex
     }
 
@@ -55,7 +87,7 @@ export function siftDown(array, index, type, compare) {
 
     if (_compare(array[minMaxChildIndex], array[index])) {
         swapvalues(array, minMaxChildIndex, index)
-        siftDown(array, minMaxChildIndex, type, compare)
+        siftDown(array, minMaxChildIndex, type, compare, heapSize)
     }
 }
 
@@ -73,13 +105,7 @@ export function siftUp(array, index, type, compare) {
     }
 }
 
-function swapvalues(array, i, j) {
-    let valI = array[i]
-    array[i] = array[j]
-    array[j] = valI
-}
-
-function defaultCompare(a, b) {
+export function defaultCompare(a, b) {
     if (a > b) {
         return 1
     } else if (a < b) {
