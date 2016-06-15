@@ -14,7 +14,7 @@ describe('Height from node count', function() {
 describe('Node count from height', function() {
     it('should calculate node count of full binary tree with given height', function() {
         assert(nodeCountFromHeight(2) === 3, 'height of 2 will have 3 nodes')
-        assert(nodeCountFromHeight(4) === 15, 'height of 4 will have 17 nodes')
-        assert(nodeCountFromHeight(5) === 31, 'height of 4 will have 17 nodes')
+        assert(nodeCountFromHeight(4) === 15, 'height of 4 will have 15 nodes')
+        assert(nodeCountFromHeight(5) === 31, 'height of 5 will have 31 nodes')
     })
 })
