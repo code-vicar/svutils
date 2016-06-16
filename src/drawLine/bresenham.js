@@ -1,22 +1,9 @@
-function incY(y) {
-    return y + 1
-}
-function incX(x) {
-    return x + 1
-}
-function decY(y) {
-    return y - 1
-}
-function decX(x) {
-    return x - 1
-}
-
 export default function drawLine(x1, y1, x2, y2) {
     let dx = x2 - x1
     let dy = y2 - y1
 
-    let stepY = incY
-    let stepX = incX
+    let incX = 1
+    let incY = 1
 
     let absDx = Math.abs(dx)
     let absDy = Math.abs(dy)
@@ -43,22 +30,22 @@ export default function drawLine(x1, y1, x2, y2) {
     // always plot the absolute values, flipping which direction to increment
     if (dx < 0) {
         dx = absDx
-        stepX = decX
+        incX = incX * -1
     }
     if (dy < 0) {
         dy = absDy
-        stepY = decY
+        incY = incY * -1
     }
 
     let Pi = 2 * dy - dx
     let line = []
     line.push([x1, y1])
     for (let i = 0; i < dx; i++) {
-        x1 = stepX(x1)
+        x1 = x1 + incX
         if (Pi <= 0) {
             Pi = Pi + 2 * dy
         } else {
-            y1 = stepY(y1)
+            y1 = y1 + incY
             Pi = Pi + 2 * dy - 2 * dx
         }
         if (steep) {
