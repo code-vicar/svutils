@@ -8,6 +8,11 @@
     "test": "mocha -r babel-register test/**/*-test.js",
     "example": "mocha -r babel-register test/example.js"
   },
+  "repository" :
+  {
+      "type" : "git",
+      "url" : "https://github.com/code-vicar/svutils.git"
+  },
   "author": "Scott Vickers",
   "license": "Apache-2.0",
   "devDependencies": {
@@ -20,6 +25,7 @@
     "mocha": "^2.5.3"
   },
   "dependencies": {
+    "graphlib": "code-vicar/graphlib#6e68628eb623ec4bdbccf6cacb54dea66735b845",
     "lodash": "^4.13.1"
   }
 }

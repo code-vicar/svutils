@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import assert from 'assert'
 
-import { asc, desc } from '../src/sort/heapSort'
+import { asc, desc } from '../src/sort/heapsort'
 
 describe('Ascending heapsort', function () {
     it('should sort an array from lowest to highest', function () {

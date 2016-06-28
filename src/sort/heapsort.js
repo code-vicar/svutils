@@ -1,4 +1,4 @@
-import { heapify, siftDown, defaultCompare, TYPE } from '../dataStructure/binaryHeap'
+import { heapify, siftDown, defaultCompare, TYPE } from '../collection/binaryheap'
 import swapvalues from '../arrayValueSwap'
 
 export function asc(array, compare) {
