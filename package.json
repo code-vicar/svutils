@@ -6,7 +6,8 @@
   "scripts": {
     "build": "gulp build",
     "test": "mocha -r babel-register test/**/*-test.js",
-    "example": "mocha -r babel-register test/example.js"
+    "example": "mocha -r babel-register test/example.js",
+    "exampleBinaryTreeMaze": "mocha -r babel-register test/exampleBinaryTreeMaze.js"
   },
   "repository" :
   {
