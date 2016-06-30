@@ -4,3 +4,5 @@ import BinaryTreeMaze from '../src/mazes/binarytree'
 let grid = new Grid()
 
 let maze = new BinaryTreeMaze(grid)
+
+console.log(maze.toString())
