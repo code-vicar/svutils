@@ -111,7 +111,8 @@ export default class Grid {
                     cell = dummyCell()
                 }
 
-                let body = '   '
+                let body = (!_.isNil(cell.distance)) ? _.pad(cell.distance.toString(), 3) : '   '
+
                 let east = this.getCell(cell.east.rowIndex, cell.east.columnIndex)
                 let east_boundary = (this._graph.hasEdge(cell, east)) ? ' ' : '|'
 
