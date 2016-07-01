@@ -6,17 +6,16 @@
   "scripts": {
     "build": "gulp build",
     "test": "mocha -r babel-register test/**/*-test.js",
-    "example": "mocha -r babel-register test/example.js",
-    "exampleBinaryTreeMaze": "mocha -r babel-register test/exampleBinaryTreeMaze.js"
+    "babel": "babel-node"
   },
-  "repository" :
-  {
-      "type" : "git",
-      "url" : "https://github.com/code-vicar/svutils.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code-vicar/svutils.git"
   },
   "author": "Scott Vickers",
   "license": "Apache-2.0",
   "devDependencies": {
+    "babel-cli": "^6.10.1",
     "babel-preset-es2015-native-generators": "^6.6.0",
     "babel-register": "^6.9.0",
     "del": "^2.2.0",

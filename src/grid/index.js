@@ -1,8 +1,7 @@
 import _ from 'lodash'
-import { Graph } from '@code-vicar/graphlib'
 
 export default class Grid {
-    constructor(rows = 10, columns = 10) {
+    constructor(graph, rows = 10, columns = 10) {
         if (!_.isInteger(rows) || rows <= 0) {
             rows = 10
         }
@@ -17,7 +16,24 @@ export default class Grid {
         this._columnsLength = columns
 
         this._size = rows * columns
-        this._graph = new Graph()
+        this._graph = graph
+
+        _.forEach(['North', 'South', 'East', 'West'], (direction) => {
+            let _direction = direction.toLowerCase()
+
+            this[`get${direction}`] = (cell) => {
+                return this.getCell(cell[_direction].rowIndex, cell[_direction].columnIndex)
+            }
+
+            this[`link${direction}`] = (cell) => {
+                let neighbor = this[`get${direction}`](cell)
+                if (neighbor) {
+                    this.link(cell, neighbor)
+                    return true
+                }
+                return false
+            }
+        })
 
         initialize_grid.call(this)
     }
