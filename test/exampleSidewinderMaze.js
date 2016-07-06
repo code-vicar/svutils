@@ -1,16 +1,19 @@
-import { Graph } from '@code-vicar/graphlib'
+import _ from 'lodash'
 import Grid from '../src/grid'
-import SidewinderMaze from '../src/mazes/sidewinder'
-import dijkstra from '../src/pathfinding/dijkstra'
+import { DijkstraFrames } from '../src/pathfinding/dijkstra'
 
-let graph = new Graph()
-let grid = new Grid(graph, 11, 11)
-let maze = new SidewinderMaze(grid)
+let grid = new Grid(5, 5)
+grid.runSidewinderMaze()
 
-console.log(maze.toString())
+console.log(grid.toString())
 
-let source = grid.getCell(0, 5)
+let source = grid.getCell(4, 0)
+let dijkstra = new DijkstraFrames(grid.graph)
 
-dijkstra(graph, source)
+let path = dijkstra.findPathFrom(grid.getCell(2, 0), source)
+dijkstra.drawFrames(grid)
+dijkstra.drawPath(grid, path)
 
-console.log(maze.toString())
+path = dijkstra.findPathFrom(grid.getCell(0, 4), source)
+dijkstra.drawFrames(grid)
+dijkstra.drawPath(grid, path)

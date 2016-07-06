@@ -1,7 +1,11 @@
 import _ from 'lodash'
+import { Graph } from '@code-vicar/graphlib'
+
+import binarytree from '../mazes/binarytree'
+import sidewinder from '../mazes/sidewinder'
 
 export default class Grid {
-    constructor(graph, rows = 10, columns = 10) {
+    constructor(rows = 10, columns = 10, graph) {
         if (!_.isInteger(rows) || rows <= 0) {
             rows = 10
         }
@@ -14,9 +18,13 @@ export default class Grid {
 
         this._rowsLength = rows
         this._columnsLength = columns
-
         this._size = rows * columns
-        this._graph = graph
+
+        if (!graph) {
+            graph = new Graph()
+        }
+
+        this.graph = graph
 
         _.forEach(['North', 'South', 'East', 'West'], (direction) => {
             let _direction = direction.toLowerCase()
@@ -35,7 +43,7 @@ export default class Grid {
             }
         })
 
-        initialize_grid.call(this)
+        this.init()
     }
 
     get rows() {
@@ -63,7 +71,7 @@ export default class Grid {
             return
         }
 
-        return this._graph.getVertex(`${rowIndex}${columnIndex}`)
+        return this.graph.getVertex(`${rowIndex}${columnIndex}`)
     }
 
     *eachCell() {
@@ -96,8 +104,17 @@ export default class Grid {
         }
     }
 
+    init() {
+        initialize_graph.call(this)
+        return this
+    }
+
     link(cell1, cell2) {
-        this._graph.connect(cell1, cell2)
+        this.graph.connect(cell1, cell2)
+    }
+
+    setCellBody(cb) {
+        this._cellBodyCB = cb
     }
 
     toString() {
@@ -111,15 +128,18 @@ export default class Grid {
                     cell = dummyCell()
                 }
 
-                let body = (!_.isNil(cell.distance)) ? _.pad(cell.distance.toString(), 3) : '   '
+                let body = '   '
+                if (typeof this._cellBodyCB === 'function') {
+                    body = this._cellBodyCB(cell) || body
+                }
 
                 let east = this.getCell(cell.east.rowIndex, cell.east.columnIndex)
-                let east_boundary = (this._graph.hasEdge(cell, east)) ? ' ' : '|'
+                let east_boundary = (this.graph.hasEdge(cell, east)) ? ' ' : '|'
 
                 top += body + east_boundary
 
                 let south = this.getCell(cell.south.rowIndex, cell.south.columnIndex)
-                let south_boundary = (this._graph.hasEdge(cell, south)) ? '   ' : '---'
+                let south_boundary = (this.graph.hasEdge(cell, south)) ? '   ' : '---'
                 let corner = '+'
 
                 bottom += south_boundary + corner
@@ -131,12 +151,22 @@ export default class Grid {
 
         return buffer
     }
+
+    runBinaryTreeMaze() {
+        binarytree(this)
+        return this
+    }
+
+    runSidewinderMaze() {
+        sidewinder(this)
+        return this
+    }
 }
 
-function initialize_grid() {
+function initialize_graph() {
     for (let rowIndex of this.rows) {
         for (let columnIndex of this.columns) {
-            this._graph.addVertex({
+            this.graph.addVertex({
                 '@@vertexId': `${rowIndex}${columnIndex}`,
                 rowIndex,
                 columnIndex,
