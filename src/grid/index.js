@@ -71,7 +71,7 @@ export default class Grid {
             return
         }
 
-        return this.graph.getVertex(`${rowIndex}${columnIndex}`)
+        return this.graph.getVertex(`${rowIndex}-${columnIndex}`)
     }
 
     *eachCell() {
@@ -167,7 +167,7 @@ function initialize_graph() {
     for (let rowIndex of this.rows) {
         for (let columnIndex of this.columns) {
             this.graph.addVertex({
-                '@@vertexId': `${rowIndex}${columnIndex}`,
+                '@@vertexId': `${rowIndex}-${columnIndex}`,
                 rowIndex,
                 columnIndex,
                 north: {
