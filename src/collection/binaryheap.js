@@ -1,6 +1,11 @@
 import _ from 'lodash'
 import swapvalues from '../arrayValueSwap'
 
+export const TYPE = {
+    MIN: 'MIN',
+    MAX: 'MAX'
+}
+
 export default class BinaryHeap {
     constructor(options) {
         let heapType = _.get(options, 'type')
@@ -41,6 +46,10 @@ export default class BinaryHeap {
 
     peek() {
         return this._heap[0]
+    }
+
+    static get TYPE() {
+        return TYPE
     }
 
     static fromArray(array, options) {
@@ -124,9 +133,4 @@ function getCompare(type, compare) {
     return function lessThan(a, b) {
         return compare(a, b) < 0
     }
-}
-
-export const TYPE = {
-    MIN: 'MIN',
-    MAX: 'MAX'
 }
