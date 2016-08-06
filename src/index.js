@@ -1,5 +1,5 @@
 import * as heapsort from './sort/heapsort'
-import Dijkstra, { DijkstraFrames } from './pathfinding'
+import Dijkstra, { DijkstraFrames } from './pathfinding/dijkstra'
 import binarytree from './mazes/binarytree'
 import sidewinder from './mazes/sidewinder'
 import Grid from './grid'
