@@ -41,6 +41,11 @@ export default class Grid {
                 }
                 return false
             }
+
+            this[`hasLink${direction}`] = (cell) => {
+                let neighbor = this[`get${direction}`](cell)
+                return this.graph.hasEdge(cell, neighbor)
+            }
         })
 
         this.init()
@@ -133,13 +138,11 @@ export default class Grid {
                     body = this._cellBodyCB(cell) || body
                 }
 
-                let east = this.getCell(cell.east.rowIndex, cell.east.columnIndex)
-                let east_boundary = (this.graph.hasEdge(cell, east)) ? ' ' : '|'
+                let east_boundary = (this.hasLinkEast(cell)) ? ' ' : '|'
 
                 top += body + east_boundary
 
-                let south = this.getCell(cell.south.rowIndex, cell.south.columnIndex)
-                let south_boundary = (this.graph.hasEdge(cell, south)) ? '   ' : '---'
+                let south_boundary = (this.hasLinkSouth(cell)) ? '   ' : '---'
                 let corner = '+'
 
                 bottom += south_boundary + corner
