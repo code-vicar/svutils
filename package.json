@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha -r @babel/register test/**/*-test.js",
-    "prepublish": "npm run compile && npm run bundle",
+    "prepare": "npm run compile && npm run bundle",
     "compile": "rm -rf lib && babel src -d lib",
     "bundle": "rm -rf bundle && webpack --mode=production lib/index.js -o ./bundle/svutils.js"
   },
