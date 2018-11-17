@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import isInteger from 'lodash.isinteger'
+import inRange from 'lodash.inrange'
+import range from 'lodash.range'
 import { Graph } from '@code-vicar/graphlib'
 
 import binarytree from '../mazes/binarytree'
@@ -6,15 +8,15 @@ import sidewinder from '../mazes/sidewinder'
 
 export default class Grid {
     constructor(rows = 10, columns = 10, graph) {
-        if (!_.isInteger(rows) || rows <= 0) {
+        if (!isInteger(rows) || rows <= 0) {
             rows = 10
         }
-        if (!_.isInteger(columns) || columns <= 0) {
+        if (!isInteger(columns) || columns <= 0) {
             columns = 10
         }
 
-        this._rows = _.range(rows)
-        this._columns = _.range(columns)
+        this._rows = range(rows)
+        this._columns = range(columns)
 
         this._rowsLength = rows
         this._columnsLength = columns
@@ -24,9 +26,9 @@ export default class Grid {
             graph = new Graph()
         }
 
-        this.graph = graph
+        this.graph = graph;
 
-        _.forEach(['North', 'South', 'East', 'West'], (direction) => {
+        ['North', 'South', 'East', 'West'].forEach((direction) => {
             let _direction = direction.toLowerCase()
 
             this[`get${direction}`] = (cell) => {
@@ -72,7 +74,7 @@ export default class Grid {
     }
 
     getCell(rowIndex, columnIndex) {
-        if (!_.inRange(rowIndex, this.rowsLength) || !_.inRange(columnIndex, this.columnsLength)) {
+        if (!inRange(rowIndex, this.rowsLength) || !inRange(columnIndex, this.columnsLength)) {
             return
         }
 
@@ -88,8 +90,8 @@ export default class Grid {
     }
 
     getRandomCell() {
-        let rowIndex = _.random(this.rowsLength - 1)
-        let columnIndex = _.random(this.columnsLength - 1)
+        let rowIndex = random(this.rowsLength - 1)
+        let columnIndex = random(this.columnsLength - 1)
 
         return this.getCell(rowIndex, columnIndex)
     }
@@ -196,7 +198,7 @@ function initialize_graph() {
 
 function print(str, times) {
     let output = ''
-    for (let time of _.range(times)) {
+    for (let time of range(times)) {
         output += str
     }
     return output

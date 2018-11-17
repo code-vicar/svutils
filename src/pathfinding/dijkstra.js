@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import pad from 'lodash.pad'
+import clone from 'lodash.clone'
 import { BFS_generator } from '@code-vicar/graphlib'
 
 export default class Dijkstra {
@@ -103,7 +104,7 @@ export class DijkstraFrames extends Dijkstra {
     }
 
     findPathFrom(cell, source) {
-        console.log('findPathFrom')
+        console.log(`findPathFrom from:'${cell['@@vertexId']}' to: '${source['@@vertexId']}'`)
         this._paths = this._paths || []
         this._paths.push({cell, source})
         return super.findPathFrom(cell, source)
@@ -115,10 +116,10 @@ export class DijkstraFrames extends Dijkstra {
             path = this._paths[this._paths.length - 1]
         }
         if (this.frames.length === 0) {
-            this.frames.push({data: {distances: _.clone(this._data.distances), searchState: _.clone(this._data.searchState)}, path})
+            this.frames.push({data: {distances: clone(this._data.distances), searchState: clone(this._data.searchState)}, path})
         }
         let ret = super.next()
-        this.frames.push({data: {distances: _.clone(this._data.distances), searchState: _.clone(this._data.searchState)}, path})
+        this.frames.push({data: {distances: clone(this._data.distances), searchState: clone(this._data.searchState)}, path})
         return ret
     }
 
@@ -132,7 +133,7 @@ export class DijkstraFrames extends Dijkstra {
             if (frame.path === path) {
                 this._data = frame.data
                 grid.setCellBody((cell) => {
-                    return _.pad(this.getDistance(cell), 3)
+                    return pad(this.getDistance(cell), 3)
                 })
                 console.log(grid.toString())
             }
@@ -141,10 +142,12 @@ export class DijkstraFrames extends Dijkstra {
     }
 
     drawPath(grid, path) {
+        const cellInPath = cell => path.some(pathCell => pathCell === cell)
         grid.setCellBody((cell) => {
-            if (_.includes(path, cell)) {
-                return _.pad(this.getDistance(cell), 3)
+            if (cellInPath(cell)) {
+                return pad(this.getDistance(cell), 3)
             }
+            return null
         })
         console.log(grid.toString())
     }

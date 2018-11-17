@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import isInteger from 'lodash.isinteger'
 import swapvalues from '../arrayValueSwap'
 
 export const TYPE = {
@@ -7,9 +7,11 @@ export const TYPE = {
 }
 
 export default class BinaryHeap {
-    constructor(options) {
-        let heapType = _.get(options, 'type')
-        let compare = _.get(options, 'compare')
+    constructor(options = {}) {
+        const {
+            type: heapType,
+            compare
+        } = options
 
         this.heapType = (heapType) ? heapType : TYPE.MIN
         this.compare = (compare) ? compare : defaultCompare
@@ -75,7 +77,7 @@ export function heapify(array, type, compare) {
 }
 
 export function siftDown(array, index, type, compare, heapSize) {
-    if (!_.isInteger(heapSize)) {
+    if (!isInteger(heapSize)) {
         heapSize = array.length
     }
     let leftChildIndex = (2 * index) + 1

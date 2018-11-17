@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import sample from 'lodash.sample'
+import random from 'lodash.random'
 
 export default function sidewinderMaze(grid) {
     let rowIdx = 0
@@ -13,8 +14,8 @@ export default function sidewinderMaze(grid) {
             }
 
             run.push(cell)
-            if (columnIdx === (grid.columnsLength - 1) || _.random(0, 1) === 0) {
-                let winner = _.sample(run)
+            if (columnIdx === (grid.columnsLength - 1) || random(0, 1) === 0) {
+                let winner = sample(run)
                 grid.linkNorth(winner)
                 run = []
             } else {

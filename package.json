@@ -3,14 +3,13 @@
   "version": "2.1.1",
   "description": "utility functions",
   "main": "dist/index.js",
-  "engines" : {
-      "node" : ">=4.4.4"
+  "engines": {
+    "node": ">=8"
   },
   "scripts": {
-    "build": "gulp build",
-    "test": "mocha -r babel-register test/**/*-test.js",
-    "prepublish": "npm run build",
-    "babel": "babel-node"
+    "test": "mocha -r @babel/register test/**/*-test.js",
+    "prepublish": "npm run compile",
+    "compile": "rm -rf lib && babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -19,17 +18,21 @@
   "author": "Scott Vickers",
   "license": "Apache-2.0",
   "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-preset-es2015-native-generators": "^6.6.0",
-    "babel-register": "^6.9.0",
-    "del": "^2.2.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-filter": "^4.0.0",
-    "mocha": "^2.5.3"
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "@code-vicar/graphlib": "1.1.4",
-    "lodash": "^4.13.1"
+    "lodash.clone": "^4.5.0",
+    "lodash.inrange": "^3.3.6",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isinteger": "^4.0.4",
+    "lodash.pad": "^4.5.1",
+    "lodash.random": "^3.2.0",
+    "lodash.range": "^3.2.0",
+    "lodash.sample": "^4.2.1"
   }
 }

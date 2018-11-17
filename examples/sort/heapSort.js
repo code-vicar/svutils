@@ -1,5 +1,5 @@
-import _ from 'lodash'
-import BinaryHeap, { TYPE } from '../src/collection/binaryheap'
+const random = require('lodash.random')
+const { default: BinaryHeap, TYPE } = require('../../lib/collection/binaryheap')
 
 let heap = new BinaryHeap({
     // type: TYPE.MIN
@@ -8,7 +8,7 @@ let heap = new BinaryHeap({
 
 let n = 20;
 for (let i = 0; i < n; i++) {
-    let r = _.random(0, 50)
+    let r = random(0, 50)
     heap.push(r)
     console.log(r)
     printHeap(heap)

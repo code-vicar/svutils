@@ -1,6 +1,5 @@
-import _ from 'lodash'
-import Grid from '../src/grid'
-import { DijkstraFrames } from '../src/pathfinding/dijkstra'
+const { default: Grid } = require('../../lib/grid')
+const { DijkstraFrames } = require('../../lib/pathfinding/dijkstra')
 
 let grid = new Grid(12, 12)
 grid.runSidewinderMaze()

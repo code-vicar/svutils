@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import sample from 'lodash.sample'
 
 export default function binaryTreeMaze(grid) {
     for (let cell of grid.eachCell()) {
@@ -14,7 +14,7 @@ export default function binaryTreeMaze(grid) {
             neighbors.push(east)
         }
 
-        let direction = _.sample(neighbors)
+        let direction = sample(neighbors)
 
         if (direction) {
             grid.link(cell, direction)
