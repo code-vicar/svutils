@@ -9,7 +9,8 @@
             "maintained node versions",
             "not dead"
           ]
-        }
+        },
+        "useBuiltIns": "usage"
       }]
     ]
   }
