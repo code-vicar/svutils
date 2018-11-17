@@ -1,6 +1,6 @@
 {
   "name": "@code-vicar/svutils",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "utility functions",
   "main": "lib/index.js",
   "engines": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@code-vicar/graphlib": "1.1.4",
+    "@code-vicar/graphlib": "^1.2.0",
     "lodash.clone": "^4.5.0",
     "lodash.inrange": "^3.3.6",
     "lodash.isequal": "^4.5.0",
