@@ -1,6 +1,6 @@
 {
   "name": "@code-vicar/svutils",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "utility functions",
   "main": "dist/index.js",
   "engines": {
@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "mocha -r @babel/register test/**/*-test.js",
-    "prepublish": "npm run compile",
-    "compile": "rm -rf lib && babel src -d lib"
+    "prepublish": "npm run compile && npm run bundle",
+    "compile": "rm -rf lib && babel src -d lib",
+    "bundle": "rm -rf bundle && webpack --mode=production lib/index.js -o ./bundle/svutils.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,9 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
   },
   "dependencies": {
     "@code-vicar/graphlib": "1.1.4",

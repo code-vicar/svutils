@@ -1,4 +1,5 @@
 node_modules
 *.sublime-*
-lib
 *debug.log
+lib
+bundle

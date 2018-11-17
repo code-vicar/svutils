@@ -2,7 +2,13 @@
     "presets": [
       ["@babel/env", {
         "targets": {
-          "node": "current"
+          "node": "current",
+          "browsers": [
+            "last 1 version",
+            "> 1%",
+            "maintained node versions",
+            "not dead"
+          ]
         }
       }]
     ]
